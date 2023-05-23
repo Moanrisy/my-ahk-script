@@ -60,10 +60,9 @@ If WinExist("Play this.mp4 - VLC media player")
     {
         ; Move the window to the seondary monitor
         WinMove, ahk_id %vlc_hwnd%, , 1970, 0, 800, 600
-        return
+    } else {
+        WinMove, ahk_id %vlc_hwnd%, , 0, 0, 1400, 1100
     }
-
-    WinMove, ahk_id %vlc_hwnd%, , 0, 0, 1400, 1100
 }
 
 ; Set default behaviour for clock in task app
