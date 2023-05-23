@@ -49,5 +49,22 @@ if (cmdWindowState != -1)
     Sleep, 300
 }
 
+; Set window width and height for VLC play this.mp4
+If WinExist("Play this.mp4 - VLC media player")
+{
+    WinGet, vlc_hwnd, ID, Play this.mp4 - VLC media player
+
+    ; Check if a secondary monitor exists
+    SysGet, MonitorCount, MonitorCount
+    if (MonitorCount > 1)
+    {
+        ; Move the window to the seondary monitor
+        WinMove, ahk_id %vlc_hwnd%, , 1970, 0, 800, 600
+        return
+    }
+
+    WinMove, ahk_id %vlc_hwnd%, , 0, 0, 1400, 1100
+}
+
 DetectHiddenWindows, Off
 return
