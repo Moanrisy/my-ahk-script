@@ -97,5 +97,11 @@ MarkWindowAsProcessed(hwnd) {
     FileAppend, %hwnd%`n, processed_windows.txt
 }
 
+IfWinExist, ahk_exe emacs.exe
+{
+    WinGet, hWnd, ID, ahk_exe emacs.exe
+    WinMaximize, ahk_id %hWnd%
+}
+
 DetectHiddenWindows, Off
 return
