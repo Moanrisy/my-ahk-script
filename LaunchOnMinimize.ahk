@@ -66,5 +66,37 @@ If WinExist("Play this.mp4 - VLC media player")
     WinMove, ahk_id %vlc_hwnd%, , 0, 0, 1400, 1100
 }
 
+; Set default behaviour for clock in task app
+If WinExist("Clock in Task")
+{
+    WinGet, cit_hwnd, ID, Clock in Task
+
+    ; Check if the window exists
+    if (cit_hwnd && !IsProcessedWindow(cit_hwnd))
+    {
+        ; Apply the desired commands to the window
+        WinSet, Style, ^0x40000, ahk_id %cit_hwnd% ; Used for the sizebox
+        WinSet, Style, ^0x800000, ahk_id %cit_hwnd% ; Used for the border
+        WinMove, ahk_id %cit_hwnd%, , 1350, 930, 600, 70 ; Moves and resizes window
+        WinSet, AlwaysOnTop, On, ahk_id %cit_hwnd% ; Set the window as not always on top
+
+        ; Mark the window as processed
+        MarkWindowAsProcessed(cit_hwnd)
+    }
+}
+
+IsProcessedWindow(hwnd) {
+    ; Check if the window's unique identifier (HWND) is stored in a file
+    FileRead, processedWindows, processed_windows.txt
+    
+    ; Return true if the window's HWND is found in the file, false otherwise
+    return RegExMatch(processedWindows, "\b" hwnd "\b")
+}
+
+MarkWindowAsProcessed(hwnd) {
+    ; Append the window's HWND to the file
+    FileAppend, %hwnd%`n, processed_windows.txt
+}
+
 DetectHiddenWindows, Off
 return
