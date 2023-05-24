@@ -38,6 +38,9 @@ CapsLock::LCtrl
         WinMaximize(currentWindow)
 }
 
+;; Focus on explorer window or launch it
+#e::WinExist('ahk_class CabinetWClass') ? WinActivate() : Run('explorer')
+
 ;; ctrl + space
 ;; ^space::
 ;; {
