@@ -1,4 +1,6 @@
-﻿RAlt & c::
+﻿#SingleInstance Force
+
+RAlt & c::
 { 
     ; Add your desired command or actions here
     ; MsgBox Init.
